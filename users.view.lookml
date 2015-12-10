@@ -7,49 +7,16 @@
     type: int
     sql: ${TABLE}.user_id
 
-  - dimension: account_email
-    sql: ${TABLE}.account_email
-
-  - dimension: account_manager
-    sql: ${TABLE}.account_manager
-
-  - dimension: discovered_via
-    sql: ${TABLE}.discovered_via
-
   - dimension: email
     sql: ${TABLE}.email
 
   - dimension: handle
     sql: ${TABLE}.handle
 
-  - dimension: integrations
-    sql: ${TABLE}.integrations
-
-  - dimension: isdancool
-    sql: ${TABLE}.isdancool
-
   - dimension_group: joindate
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.joindate
-
-  - dimension: permissions
-    sql: ${TABLE}.permissions
-
-  - dimension: plan
-    sql: ${TABLE}.plan
-
-  - dimension: skype
-    sql: ${TABLE}.skype
-
-  - dimension: testbuffer
-    sql: ${TABLE}.testbuffer
-
-  - dimension: timeoverride
-    sql: ${TABLE}.timeoverride
-
-  - dimension: undefined
-    sql: ${TABLE}.undefined
 
   - measure: count
     type: count

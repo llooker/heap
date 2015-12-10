@@ -29,12 +29,6 @@
   - dimension: domain
     sql: ${TABLE}.domain
 
-  - dimension: duration
-    sql: ${TABLE}.duration
-
-  - dimension: durationms
-    sql: ${TABLE}.durationms
-
   - dimension: environment_id
     sql: ${TABLE}.environment_id
 
@@ -45,38 +39,17 @@
   - dimension: event_name
     sql: ${TABLE}.event_name
 
-  - dimension: group_by
-    sql: ${TABLE}.group_by
-
-  - dimension: group_by_type
-    sql: ${TABLE}.group_by_type
-
   - dimension: hash
     sql: ${TABLE}.hash
 
   - dimension: href
     sql: ${TABLE}.href
 
-  - dimension: javascript
-    sql: ${TABLE}.javascript
-
   - dimension: landing_page
     sql: ${TABLE}.landing_page
 
   - dimension: library
     sql: ${TABLE}.library
-
-  - dimension: main_object_count
-    sql: ${TABLE}.main_object_count
-
-  - dimension: main_object_info
-    sql: ${TABLE}.main_object_info
-
-  - dimension: main_object_type
-    sql: ${TABLE}.main_object_type
-
-  - dimension: message
-    sql: ${TABLE}.message
 
   - dimension: pageview_id
     type: int
@@ -106,9 +79,6 @@
   - dimension: region
     sql: ${TABLE}.region
 
-  - dimension: reportid
-    sql: ${TABLE}.reportid
-
   - dimension: screen_a11y_id
     sql: ${TABLE}.screen_a11y_id
 
@@ -124,24 +94,20 @@
   - dimension: selector
     sql: ${TABLE}.selector
 
-  - dimension: sentry_id
-    sql: ${TABLE}.sentry_id
-
   - dimension: session_id
     type: int
     # hidden: true
     sql: ${TABLE}.session_id
+  
+  - dimension: session_unique_id
+#     hidden: true
+    type: string
+    sql: ${session_id} || '-' || ${user_id}
 
   - dimension_group: session
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.session_time
-
-  - dimension: status
-    sql: ${TABLE}.status
-
-  - dimension: subject
-    sql: ${TABLE}.subject
 
   - dimension: target_a11y_id
     sql: ${TABLE}.target_a11y_id
@@ -175,9 +141,6 @@
     timeframes: [time, date, week, month]
     sql: ${TABLE}.time
 
-  - dimension: time_elapsed
-    sql: ${TABLE}.time_elapsed
-
   - dimension: timestamp
     sql: ${TABLE}.timestamp
 
@@ -209,33 +172,6 @@
 
   - dimension: view_controller
     sql: ${TABLE}.view_controller
-
-  - dimension: where
-    sql: ${TABLE}."where"
-
-  - dimension: where_builtin_props
-    sql: ${TABLE}.where_builtin_props
-
-  - dimension: where_count_of
-    sql: ${TABLE}.where_count_of
-
-  - dimension: where_custom_props
-    sql: ${TABLE}.where_custom_props
-
-  - dimension: where_has_done
-    sql: ${TABLE}.where_has_done
-
-  - dimension: where_in_segment
-    sql: ${TABLE}.where_in_segment
-
-  - dimension: where_subclauses
-    sql: ${TABLE}.where_subclauses
-
-  - dimension: window_height
-    sql: ${TABLE}.window_height
-
-  - dimension: window_width
-    sql: ${TABLE}.window_width
 
   - measure: count
     type: count
