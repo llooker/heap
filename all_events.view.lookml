@@ -176,4 +176,52 @@
   - measure: count
     type: count
     drill_fields: [app_name, event_name, users.user_id, sessions.session_id, sessions.app_name]
-
+  
+    
+#   - filter: event1
+#     suggest_dimension: event_name
+# 
+#   - measure: event1_session_count
+#     type: number
+#     sql: | 
+#       COUNT(
+#         DISTINCT(
+#           CASE 
+#             WHEN 
+#             {% condition event1 %} ${event_name} {% endcondition %} 
+#               THEN ${session_unique_id}
+#             ELSE NULL END 
+#         )
+#       )
+#   
+#   - filter: event2
+#     suggest_dimension: event_name
+# 
+#   - measure: event2_session_count
+#     type: number
+#     sql: | 
+#       COUNT(
+#         DISTINCT(
+#           CASE 
+#             WHEN 
+#             {% condition event1 %} ${event_name} {% endcondition %} 
+#               THEN ${session_unique_id}
+#             ELSE NULL END 
+#         )
+#       )
+# 
+#   - filter: event3
+#     suggest_dimension: event_name
+# 
+#   - measure: event3_session_count
+#     type: number
+#     sql: | 
+#       COUNT(
+#         DISTINCT(
+#           CASE 
+#             WHEN 
+#             {% condition event1 %} ${event_name} {% endcondition %} 
+#               THEN ${session_unique_id}
+#             ELSE NULL END 
+#         )
+#       )

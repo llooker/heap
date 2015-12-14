@@ -30,6 +30,12 @@
       sql_on: ${sessions.user_id} = ${users.user_id}
       relationship: many_to_one
     
+    - join: user_facts
+      view_label: "Users"
+      type: left_outer
+      sql_on: ${sessions.user_id} = ${user_facts.user_id}
+      relationship: many_to_one
+    
     - join: session_facts
       view_label: "Sessions"
       type: left_outer

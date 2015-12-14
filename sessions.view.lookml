@@ -98,6 +98,7 @@
   - measure: count_users
     type: count_distinct
     sql: ${user_id}
+    drill_fields: [user_id]
   
   - measure: average_sessions_per_user
     type: number
@@ -109,4 +110,6 @@
     detail:
     - session_id
     - app_name
+    - user_id
+    - utm_source
 

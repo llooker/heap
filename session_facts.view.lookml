@@ -45,6 +45,11 @@
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.session_end_time
+  
+  - dimension: session_duration
+    type: number
+    sql: extract(epoch from (${TABLE}.session_end_time - ${TABLE}.session_start_time))/60
+    decimals: 2
 
   - dimension: event_count
     type: int
@@ -57,6 +62,10 @@
   - measure: average_events_per_session
     type: average
     sql: ${event_count}
+  
+  - measure: average_session_duration
+    type: average
+    sql: ${session_duration}
 
   sets:
     detail:
