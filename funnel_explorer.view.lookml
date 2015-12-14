@@ -3,7 +3,7 @@
 # Or, you could make this view a derived table, like this:
   derived_table:
     sql: |
-      SELECT all_events.session_id as session_id
+      SELECT all_events.session_id || '-' || all_events.user_id as session_unique_id
         , MIN(
             CASE WHEN
               {% condition event1 %} all_events.event_name {% endcondition %} 
@@ -38,10 +38,10 @@
       suggest_explore: all_events
       suggest_dimension: all_events.event_name
 
-    - dimension: session_id
+    - dimension: session_unique_id
       type: string
       primary_key: TRUE
-      sql: ${TABLE}.session_id
+      sql: ${TABLE}.session_unique_id
 
     - dimension: event1
       type: time
@@ -68,17 +68,17 @@
 
     - measure: count_sessions
       type: count_distinct
-      sql: ${session_id}
+      sql: ${session_unique_id}
 
     - measure: count_sessions_event1
       type: count_distinct
-      sql: ${session_id}
+      sql: ${session_unique_id}
       filters: 
         event1_time: NOT NULL
     
     - measure: count_sessions_event12
       type: count_distinct
-      sql: ${session_id}
+      sql: ${session_unique_id}
       filters: 
         event1_time: NOT NULL
         event2_time: NOT NULL
@@ -86,7 +86,7 @@
 
     - measure: count_sessions_event123  
       type: count_distinct
-      sql: ${session_id}
+      sql: ${session_unique_id}
       filters: 
         event1_time: NOT NULL
         event2_time: NOT NULL

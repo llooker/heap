@@ -28,7 +28,7 @@
     sql: ${TABLE}.city
 
   - dimension: country
-    sql: ${TABLE}.country
+    sql: CASE WHEN ${TABLE}.country = 'United States' THEN 'United States of America' ELSE ${TABLE}.country END
 
   - dimension: device_type
     sql: ${TABLE}.device_type
@@ -51,6 +51,14 @@
 
   - dimension: referrer
     sql: ${TABLE}.referrer
+  
+  - dimension: referrer_domain
+    sql: split_part(${referrer},'/',3)
+  
+  - dimension: referrer_domain_mapped
+    sql: CASE WHEN ${referrer_domain} like '%facebook%' THEN 'facebook'
+              WHEN ${referrer_domain} like '%google%' THEN 'google'
+              ELSE ${referrer_domain} END
 
   - dimension: region
     sql: ${TABLE}.region
@@ -59,11 +67,6 @@
     sql: ${TABLE}.search_keyword
 
   - dimension_group: session
-    type: time
-    timeframes: [time, date, week, month]
-    sql: ${TABLE}.session_time
-
-  - dimension_group: time
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.time
@@ -95,6 +98,11 @@
   - measure: count_users
     type: count_distinct
     sql: ${user_id}
+  
+  - measure: average_sessions_per_user
+    type: number
+    sql: ${count}::float/nullif(${count_users},0)
+    decimals: 1
 
   # ----- Sets of fields for drilling ------
   sets:

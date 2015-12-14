@@ -46,13 +46,17 @@
     timeframes: [time, date, week, month]
     sql: ${TABLE}.session_end_time
 
-  - dimension: all_events_count
+  - dimension: event_count
     type: int
     sql: ${TABLE}."all_events.count"
   
   - dimension: is_bounced
     type: yesno
-    sql: ${all_events_count} = 1
+    sql: ${event_count} = 1
+  
+  - measure: average_events_per_session
+    type: average
+    sql: ${event_count}
 
   sets:
     detail:
