@@ -177,51 +177,70 @@
     type: count
     drill_fields: [app_name, event_name, users.user_id, sessions.session_id, sessions.app_name]
   
+  - measure: count_users
+    type: count_distinct 
+    sql: ${user_id}
     
-#   - filter: event1
-#     suggest_dimension: event_name
-# 
-#   - measure: event1_session_count
-#     type: number
-#     sql: | 
-#       COUNT(
-#         DISTINCT(
-#           CASE 
-#             WHEN 
-#             {% condition event1 %} ${event_name} {% endcondition %} 
-#               THEN ${session_unique_id}
-#             ELSE NULL END 
-#         )
-#       )
-#   
-#   - filter: event2
-#     suggest_dimension: event_name
-# 
-#   - measure: event2_session_count
-#     type: number
-#     sql: | 
-#       COUNT(
-#         DISTINCT(
-#           CASE 
-#             WHEN 
-#             {% condition event1 %} ${event_name} {% endcondition %} 
-#               THEN ${session_unique_id}
-#             ELSE NULL END 
-#         )
-#       )
-# 
-#   - filter: event3
-#     suggest_dimension: event_name
-# 
-#   - measure: event3_session_count
-#     type: number
-#     sql: | 
-#       COUNT(
-#         DISTINCT(
-#           CASE 
-#             WHEN 
-#             {% condition event1 %} ${event_name} {% endcondition %} 
-#               THEN ${session_unique_id}
-#             ELSE NULL END 
-#         )
-#       )
+  - filter: event1
+    suggest_dimension: event_name
+
+  - measure: event1_session_count
+    type: number
+    sql: | 
+      COUNT(
+        DISTINCT(
+          CASE 
+            WHEN 
+            {% condition event1 %} ${event_name} {% endcondition %} 
+              THEN ${session_unique_id}
+            ELSE NULL END 
+        )
+      )
+  
+  - filter: event2
+    suggest_dimension: event_name
+
+  - measure: event2_session_count
+    type: number
+    sql: | 
+      COUNT(
+        DISTINCT(
+          CASE 
+            WHEN 
+            {% condition event2 %} ${event_name} {% endcondition %} 
+              THEN ${session_unique_id}
+            ELSE NULL END 
+        )
+      )
+
+  - filter: event3
+    suggest_dimension: event_name
+
+  - measure: event3_session_count
+    type: number
+    sql: | 
+      COUNT(
+        DISTINCT(
+          CASE 
+            WHEN 
+            {% condition event3 %} ${event_name} {% endcondition %} 
+              THEN ${session_unique_id}
+            ELSE NULL END 
+        )
+      )
+
+  - filter: event4
+    suggest_dimension: event_name
+
+  - measure: event4_session_count
+    type: number
+    sql: | 
+      COUNT(
+        DISTINCT(
+          CASE 
+            WHEN 
+            {% condition event4 %} ${event_name} {% endcondition %} 
+              THEN ${session_unique_id}
+            ELSE NULL END 
+        )
+      )
