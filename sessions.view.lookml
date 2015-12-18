@@ -59,7 +59,11 @@
     sql: CASE WHEN ${referrer_domain} like '%facebook%' THEN 'facebook'
               WHEN ${referrer_domain} like '%google%' THEN 'google'
               ELSE ${referrer_domain} END
-
+    html: |
+      {{ linked_value }}
+      <a href="/dashboards/heap_block::referrer_dashboard?referrer_domain={{ value | encode_uri }}" target="_new">
+      <img src="/images/qr-graph-line@2x.png" height=20 width=20></a>
+    
   - dimension: region
     sql: ${TABLE}.region
 

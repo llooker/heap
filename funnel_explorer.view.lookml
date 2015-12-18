@@ -23,6 +23,7 @@
               ELSE NULL END
             ) as event3_time
       FROM main_production.all_events as all_events
+      WHERE {% condition event_time %} all_events.time {% endcondition %} 
       GROUP BY 1
 
   fields:
@@ -37,7 +38,10 @@
     - filter: event3
       suggest_explore: all_events
       suggest_dimension: all_events.event_name
-
+    
+    - filter: event_time
+      type: datetime
+    
     - dimension: session_unique_id
       type: string
       primary_key: TRUE
