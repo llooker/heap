@@ -105,16 +105,32 @@
         event2_before_event3: TRUE
     
     - measure: conversion_rate_event_1
+      description: "Percent of Total Sessions that Convert to Event 1"
       type: number
       sql: 100*(${count_sessions_event1}::float/NULLIF(${count_sessions},0))
       value_format: '0.00\%'
     
     - measure: conversion_rate_event_2
+      description: "Percent of Total Sessions that Convert to Event 1 and 2"
       type: number
       sql: 100*(${count_sessions_event12}::float/NULLIF(${count_sessions},0))
       value_format: '0.00\%'
     
+    - measure: conversion_rate_event_1_to_2
+      description: "Percent of Sessions with Event 1 that convert to Event 2"
+      type: number
+      sql: 100*(${count_sessions_event12}::float/NULLIF(${count_sessions_event1},0))
+      value_format: '0.00\%'
+    
     - measure: conversion_rate_event_3
+      description: "Percent of Total Sessions that Convert to Event 1, 2, and 3"
       type: number
       sql: 100*(${count_sessions_event123}::float/NULLIF(${count_sessions},0))
       value_format: '0.00\%'
+    
+    - measure: conversion_rate_event_1_and_2_to_3
+      description: "Percent of Sessions with Event 1 and 2 that convert to Event 3"
+      type: number
+      sql: 100*(${count_sessions_event12}::float/NULLIF(${count_sessions_event1},0))
+      value_format: '0.00\%'
+    

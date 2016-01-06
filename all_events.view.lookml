@@ -75,6 +75,15 @@
 
   - dimension: referrer
     sql: ${TABLE}.referrer
+  
+  - dimension: referrer_domain
+    sql: split_part(${referrer},'/',3)
+  
+  - dimension: referrer_domain_mapped
+    sql: CASE WHEN ${referrer_domain} like '%facebook%' THEN 'facebook'
+              WHEN ${referrer_domain} like '%google%' THEN 'google'
+              ELSE ${referrer_domain} END
+    html: |
 
   - dimension: region
     sql: ${TABLE}.region

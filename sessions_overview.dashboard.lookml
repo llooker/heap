@@ -8,7 +8,7 @@
       height: 400
     - elements: [daily_session_cnt_dur, sessions_by_device]
       height: 400
-    - elements: [sessions_and_users]
+    - elements: [sessions_and_users, top_100_events]
       height: 400
     - elements: [top_15_external_referers, referrer_stats]
       height: 400
@@ -420,6 +420,32 @@
     show_x_axis_label: true
     show_x_axis_ticks: true
     x_axis_scale: auto
+  
+  - name: top_100_events
+    title: Top 100 Event Types
+    type: table
+    model: heap_block
+    explore: all_events
+    dimensions: [all_events.event_name]
+    measures: [all_events.count, sessions.count, all_events.count_users]
+    listen:
+      date: all_events.time_date
+      device_type: all_events.device_type
+      referrer_domain: all_events.referrer_domain_mapped
+    sorts: [all_events.count desc]
+    limit: 100
+    label_density: 25
+    legend_position: center
+    y_axis_gridlines: true
+    show_view_names: true
+    y_axis_combined: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    x_axis_scale: auto
+
 
 
 
