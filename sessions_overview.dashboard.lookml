@@ -8,6 +8,8 @@
       height: 400
     - elements: [daily_session_cnt_dur, sessions_by_device]
       height: 400
+    - elements: [sessions_and_users]
+      height: 400
     - elements: [top_15_external_referers, referrer_stats]
       height: 400
     - elements: [sessions_by_country, sessions_by_state]
@@ -382,6 +384,42 @@
       '#7E6984', '#6E6A8A', '#5D6B91', '#4D6C97', '#3D6D9E']
     hidden_fields: [sessions.count_users]
     show_row_numbers: true
+  
+  - name: sessions_and_users
+    title: Daily Count Sessions and Users
+    type: looker_column
+    model: heap_block
+    explore: sessions
+    dimensions: [sessions.session_date]
+    measures: [sessions.count_users, sessions.count]
+    listen:
+      date: sessions.session_date
+      device_type: sessions.device_type
+      referrer_domain: sessions.referrer_domain_mapped
+    sorts: [sessions.session_date]
+    limit: 500
+    column_limit: 50
+    colors: ['#5245ed', '#1ea8df', '#353b49', '#49cec1', '#b3a0dd', '#db7f2a', '#706080',
+      '#a2dcf3', '#776fdf', '#e9b404', '#635189']
+    label_density: 25
+    font_size: medium
+    legend_position: center
+    y_axis_gridlines: true
+    show_view_names: true
+    series_labels:
+      'No': Returning Session
+      'Yes': First Session
+      __FILE: heap_block/sessions_overview.dashboard.lookml
+      __LINE_NUM: 120
+    series_types:
+      sessions.count_users: line
+    y_axis_combined: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    x_axis_scale: auto
 
 
 
