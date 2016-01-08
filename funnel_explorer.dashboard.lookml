@@ -6,10 +6,8 @@
       height: 400
     - elements: [trending_event_1_conversion]
       height: 400
-    
     - elements: [trending_event_2_conversion]
       height: 400
-    
     - elements: [trending_event_3_conversion]
       height: 400
 

@@ -38,6 +38,10 @@
 
   - dimension: event_name
     sql: ${TABLE}.event_name
+  
+  - dimension: unique_event_id
+    sql: ${event_id} || '-' || ${event_name}
+    primary_key: true
 
   - dimension: hash
     sql: ${TABLE}.hash
@@ -185,6 +189,11 @@
   - measure: count
     type: count
     drill_fields: [app_name, event_name, users.user_id, sessions.session_id, sessions.app_name]
+  
+  - measure: count_percent_of_total
+    type: percent_of_total
+    sql: ${count}
+    decimals: 1
   
   - measure: count_users
     type: count_distinct 
