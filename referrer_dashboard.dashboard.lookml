@@ -25,7 +25,7 @@
     type: field_filter
     explore: sessions
     field: sessions.referrer_domain_mapped
-    default_value: google
+    default_value: google # modify to desired default mapped referrer domain
     
   elements:
 

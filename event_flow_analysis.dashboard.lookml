@@ -17,7 +17,7 @@
     type: field_filter
     explore: all_events
     field: all_events.event_name
-    default_value: start_game
+    default_value: start_game # modify to desired default first event name value
   
   - name: date
     type: date_filter
