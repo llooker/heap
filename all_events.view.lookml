@@ -188,7 +188,7 @@
 
   - measure: count
     type: count
-    drill_fields: [app_name, event_name, users.user_id, sessions.session_id, sessions.app_name]
+    drill_fields: [event_name, user_id, session_id]
   
   - measure: count_percent_of_total
     type: percent_of_total
@@ -198,6 +198,7 @@
   - measure: count_users
     type: count_distinct 
     sql: ${user_id}
+    drill_fields: [user_id, city]
     
   - filter: event1
     suggest_dimension: event_name

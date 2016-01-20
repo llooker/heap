@@ -68,13 +68,4 @@
     type: average
     sql: ${session_duration_minutes}
     decimals: 2
-    
-  sets:
-    detail:
-      - session_unique_id
-      - user_id
-      - session_sequence_number
-      - session_start_time_time
-      - session_end_time_time
-      - all_events_count
 

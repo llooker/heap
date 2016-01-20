@@ -33,10 +33,3 @@
     sql: ${session_count}
     tiers: [2,5,10,20]
     style: integer
-
-  sets:
-    detail:
-      - user_id
-      - first_session_time
-      - session_count
-

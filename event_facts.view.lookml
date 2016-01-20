@@ -37,12 +37,3 @@
   - dimension: event_sequence_number
     type: int
     sql: ${TABLE}.event_sequence_number
-
-  sets:
-    detail:
-      - event_id
-      - event_name
-      - user_id
-      - session_id
-      - event_sequence_number
-
