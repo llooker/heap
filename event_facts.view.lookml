@@ -1,7 +1,7 @@
 - explore: event_facts
 - view: event_facts
   derived_table:
-    sql_trigger_value: select date(convert_timezone('pst', getdate() - interval '3 hours'))
+    sql_trigger_value: select date(convert_timezone('pst', getdate() - interval '3 hours')) # update trigger value to desired frequency and timezone
     sortkeys: [event_sequence_number]
     distkey: unique_event_id
     sql: |

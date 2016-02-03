@@ -2,7 +2,7 @@
   derived_table:
     sortkeys: [session_start_time]
     distkey: session_unique_id
-    sql_trigger_value: select date(convert_timezone('pst', getdate() - interval '3 hours'))
+    sql_trigger_value: select date(convert_timezone('pst', getdate() - interval '3 hours')) # update trigger value to desired frequency and timezone
     sql: |
       SELECT 
         all_events.session_id || '-' || all_events.user_id AS session_unique_id,
