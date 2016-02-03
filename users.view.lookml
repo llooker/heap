@@ -19,6 +19,7 @@
     sql: ${TABLE}.joindate
 
   - measure: count
+    hidden: true
     type: count
     drill_fields: detail*
 
