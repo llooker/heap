@@ -48,7 +48,6 @@
       date: sessions.session_date
       device_type: sessions.device_type
       referrer_domain: sessions.referrer_domain_mapped
-    sorts: [sessions.count desc]
     limit: 500
     font_size: medium
   
@@ -62,7 +61,6 @@
       date: sessions.session_date
       device_type: sessions.device_type
       referrer_domain: sessions.referrer_domain_mapped
-    sorts: [sessions.count_users desc]
     limit: 500
     font_size: medium
   
@@ -76,7 +74,6 @@
       date: sessions.session_date
       device_type: sessions.device_type
       referrer_domain: sessions.referrer_domain_mapped
-    sorts: [sessions.average_sessions_per_user desc]
     limit: 500
     font_size: medium
   
@@ -92,7 +89,6 @@
       referrer_domain: sessions.referrer_domain_mapped
     filters:
       session_facts.session_duration_minutes: <300
-    sorts: [session_facts.average_session_duration desc, session_facts.average_session_duration_minutes desc]
     limit: 500
   
   - name: new_sessions
@@ -154,8 +150,6 @@
     y_axis_gridlines: true
     series_types:
       session_facts.average_session_duration_minutes: line
-      __FILE: heap_block/sessions_overview.dashboard.lookml
-      __LINE_NUM: 147
     show_y_axis_labels: true
     show_y_axis_ticks: true
     y_axis_tick_density: default
@@ -409,8 +403,6 @@
     series_labels:
       'No': Returning Session
       'Yes': First Session
-      __FILE: heap_block/sessions_overview.dashboard.lookml
-      __LINE_NUM: 120
     series_types:
       sessions.count_users: line
     y_axis_combined: true

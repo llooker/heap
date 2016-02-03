@@ -91,6 +91,10 @@
 
   - dimension: utm_source
     sql: ${TABLE}.utm_source
+  
+  - dimension: source_medium
+    type: string
+    sql: ${utm_source} || '/' || ${utm_medium}
 
   - dimension: utm_term
     sql: ${TABLE}.utm_term

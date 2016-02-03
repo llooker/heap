@@ -1,4 +1,3 @@
-- explore: event_facts
 - view: event_facts
   derived_table:
     sql_trigger_value: select date(convert_timezone('pst', getdate() - interval '3 hours')) # update trigger value to desired frequency and timezone
