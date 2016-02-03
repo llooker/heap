@@ -24,12 +24,12 @@
     sql: ${TABLE}.session_unique_id
 
   - dimension: user_id
-    type: int
+    type: number
     hidden: true
     sql: ${TABLE}.user_id
 
   - dimension: session_sequence_number
-    type: int
+    type: number
     sql: ${TABLE}.session_sequence_number
   
   - dimension: is_first_session
@@ -38,34 +38,33 @@
 
   - dimension_group: session_start_time
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [time, date, week, month, hour_of_day, day_of_week_index]
     sql: ${TABLE}.session_start_time
 
   - dimension_group: session_end_time
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [time, date, week, month, hour_of_day, day_of_week_index]
     sql: ${TABLE}.session_end_time
   
   - dimension: session_duration_minutes
     type: number
     sql: extract(epoch from (${TABLE}.session_end_time - ${TABLE}.session_start_time))/60
-    decimals: 2
+    value_format_name: decimal_2
 
   - dimension: event_count
-    type: int
+    type: number
     sql: ${TABLE}."all_events.count"
   
   - dimension: is_bounced
     type: yesno
-    sql: ${event_count} = 1
+    sql: ${event_count} = 1 # update to definition of bounced session relevant to Heap implementation
   
   - measure: average_events_per_session
     type: average
     sql: ${event_count}
-    decimals: 1
+    value_format_name: decimal_1
   
   - measure: average_session_duration_minutes
     type: average
     sql: ${session_duration_minutes}
-    decimals: 2
-
+    value_format_name: decimal_2

@@ -3,7 +3,7 @@
   fields:
 
   - dimension: session_id
-    type: int
+    type: number
     sql: ${TABLE}.session_id
   
   - dimension: session_unique_id
@@ -34,7 +34,7 @@
     sql: ${TABLE}.device_type
 
   - dimension: event_id
-    type: int
+    type: number
     sql: ${TABLE}.event_id
 
   - dimension: landing_page
@@ -72,11 +72,11 @@
 
   - dimension_group: session
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [time, date, week, month, hour_of_day, day_of_week_index]
     sql: ${TABLE}.time
 
   - dimension: user_id
-    type: int
+    type: number
     # hidden: true
     sql: ${TABLE}.user_id
 
@@ -107,7 +107,7 @@
   - measure: average_sessions_per_user
     type: number
     sql: ${count}::float/nullif(${count_users},0)
-    decimals: 1
+    value_format_name: decimal_1
 
   # ----- Sets of fields for drilling ------
   sets:
@@ -117,4 +117,3 @@
     - user_id
     - utm_source
     - users.email
-

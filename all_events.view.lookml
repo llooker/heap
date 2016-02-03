@@ -33,7 +33,7 @@
     sql: ${TABLE}.environment_id
 
   - dimension: event_id
-    type: int
+    type: number
     sql: ${TABLE}.event_id
 
   - dimension: event_name
@@ -56,7 +56,7 @@
     sql: ${TABLE}.library
 
   - dimension: pageview_id
-    type: int
+    type: number
     sql: ${TABLE}.pageview_id
 
   - dimension: pageview_properties
@@ -108,7 +108,7 @@
     sql: ${TABLE}.selector
 
   - dimension: session_id
-    type: int
+    type: number
     # hidden: true
     sql: ${TABLE}.session_id
   
@@ -119,7 +119,7 @@
 
   - dimension_group: session
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [time, date, week, month, hour_of_day, day_of_week_index]
     sql: ${TABLE}.session_time
 
   - dimension: target_a11y_id
@@ -151,7 +151,7 @@
 
   - dimension_group: time
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [time, date, week, month, hour_of_day, day_of_week_index]
     sql: ${TABLE}.time
 
   - dimension: timestamp
@@ -164,7 +164,7 @@
     sql: ${TABLE}.type
 
   - dimension: user_id
-    type: int
+    type: number
     # hidden: true
     sql: ${TABLE}.user_id
 
@@ -193,7 +193,7 @@
   - measure: count_percent_of_total
     type: percent_of_total
     sql: ${count}
-    decimals: 1
+    value_format_name: decimal_1
   
   - measure: count_users
     type: count_distinct 

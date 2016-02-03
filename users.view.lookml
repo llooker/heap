@@ -4,7 +4,7 @@
 
   - dimension: user_id
     primary_key: true
-    type: int
+    type: number
     sql: ${TABLE}.user_id
 
   - dimension: email

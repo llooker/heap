@@ -19,7 +19,7 @@
     drill_fields: detail*
 
   - dimension: event_id
-    type: int
+    type: number
     sql: ${TABLE}.event_id
 
   - dimension: event_name
@@ -27,13 +27,13 @@
     sql: ${TABLE}.event_name
 
   - dimension: user_id
-    type: int
+    type: number
     sql: ${TABLE}.user_id
 
   - dimension: session_id
-    type: int
+    type: number
     sql: ${TABLE}.session_id
 
   - dimension: event_sequence_number
-    type: int
+    type: number
     sql: ${TABLE}.event_sequence_number
