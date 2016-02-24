@@ -422,8 +422,8 @@
     measures: [all_events.count, sessions.count, all_events.count_users]
     listen:
       date: all_events.time_date
-      device_type: all_events.device_type
-      referrer_domain: all_events.referrer_domain_mapped
+      # device_type: all_events.device_type
+      # referrer_domain: all_events.referrer_domain_mapped
     sorts: [all_events.count desc]
     limit: 100
     label_density: 25

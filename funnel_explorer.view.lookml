@@ -4,27 +4,27 @@
   derived_table:
     sql: |
       SELECT all_events.session_id || '-' || all_events.user_id as session_unique_id
-        , MIN(all_events.session_time) as session_time
+        , MIN(all_events.time) as session_time
         , MIN(
             CASE WHEN
-              {% condition event1 %} all_events.event_name {% endcondition %} 
+              {% condition event1 %} all_events.event_table_name {% endcondition %} 
               THEN all_events.time
               ELSE NULL END
             ) as event1_time
         , MIN(
             CASE WHEN
-              {% condition event2 %} all_events.event_name {% endcondition %} 
+              {% condition event2 %} all_events.event_table_name {% endcondition %} 
               THEN all_events.time
               ELSE NULL END
             ) as event2_time
         , MIN(
             CASE WHEN
-              {% condition event3 %} all_events.event_name {% endcondition %} 
+              {% condition event3 %} all_events.event_table_name {% endcondition %} 
               THEN all_events.time
               ELSE NULL END
             ) as event3_time
       FROM main_production.all_events as all_events
-      WHERE {% condition session_date %} all_events.session_time {% endcondition %} 
+      WHERE {% condition session_date %} all_events.time {% endcondition %} 
       GROUP BY 1
 
   fields:
