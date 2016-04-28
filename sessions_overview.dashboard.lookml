@@ -84,7 +84,7 @@
     explore: sessions
     measures: [session_facts.average_session_duration_minutes]
     listen:
-      date: sessions.session_date
+      date: session_facts.session_start_time_date
       device_type: sessions.device_type
       referrer_domain: sessions.referrer_domain_mapped
     filters:
@@ -100,7 +100,7 @@
     pivots: [session_facts.is_first_session]
     measures: [sessions.count]
     listen:
-      date: sessions.session_date
+      date: session_facts.session_start_time_date
       device_type: sessions.device_type
       referrer_domain: sessions.referrer_domain_mapped
     sorts: [sessions.session_date, session_facts.is_first_session]
