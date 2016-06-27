@@ -1,13 +1,13 @@
 - view: event_flow
   derived_table:
     sql_trigger_value: select count(*) from ${event_facts.SQL_TABLE_NAME}
-    sortkeys: [event_sequence_number]
+    sortkeys: [sequence_number_for_event_flow]
     distkey: unique_event_id
     sql: |
       select      a.unique_event_id
                   , a.event_id
                   , a.session_id
-                  , a.event_sequence_number
+                  , a.sequence_number_for_event_flow
                   , a.event_name
                   , a.user_id
                   , b.event_name as event_2
@@ -17,19 +17,19 @@
       
       from ${event_facts.SQL_TABLE_NAME} a
       left join ${event_facts.SQL_TABLE_NAME} b
-      on a.event_sequence_number + 1 = b.event_sequence_number
+      on a.sequence_number_for_event_flow + 1 = b.sequence_number_for_event_flow
       and a.user_id = b.user_id
       and a.session_id = b.session_id
       left join ${event_facts.SQL_TABLE_NAME} c
-      on a.event_sequence_number + 2 = c.event_sequence_number
+      on a.sequence_number_for_event_flow + 2 = c.sequence_number_for_event_flow
       and a.user_id = c.user_id
       and a.session_id = c.session_id
       left join ${event_facts.SQL_TABLE_NAME} d
-      on a.event_sequence_number + 3 = d.event_sequence_number
+      on a.sequence_number_for_event_flow + 3 = d.sequence_number_for_event_flow
       and a.user_id = d.user_id
       and a.session_id = d.session_id
       left join ${event_facts.SQL_TABLE_NAME} e
-      on a.event_sequence_number + 4 = e.event_sequence_number
+      on a.sequence_number_for_event_flow + 4 = e.sequence_number_for_event_flow
       and a.user_id = e.user_id
       and a.session_id = e.session_id
 
@@ -44,10 +44,10 @@
     hidden: true
     sql: ${TABLE}.session_id
 
-  - dimension: event_sequence_number
+  - dimension: sequence_number_for_event_flow
     type: number
     hidden: true
-    sql: ${TABLE}.event_sequence_number
+    sql: ${TABLE}.sequence_number_for_event_flow
 
   - dimension: event_name
     hidden: true
@@ -102,7 +102,7 @@
       - unique_event_id
       - event_id
       - session_id
-      - event_sequence_number
+      - sequence_number_for_event_flow
       - event_name
       - user_id
       - event_2

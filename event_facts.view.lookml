@@ -4,18 +4,65 @@
     sortkeys: [event_sequence_number]
     distkey: unique_event_id
     sql: |
-      select event_id
-            , event_name
-            , event_id || '-' || event_name as unique_event_id
-            , user_id
-            , session_id
-            , row_number() over(partition by session_id, user_id order by a."time") as event_sequence_number
-      from main_production.all_events as a 
+      WITH 
+        event_count AS (
+            SELECT 
+              event_table_name
+              , COUNT(*) AS cardinality
+            FROM main_production.all_events
+            WHERE TIME > DATEADD('day', - 30, GETDATE())
+            GROUP BY 1
+        )
+        , all_events AS (
+            SELECT 
+              DISTINCT all_events.event_id
+              , all_events.user_id AS user_id
+              , all_events.session_id
+              , all_events.event_table_name AS event_name
+              , all_events.TIME AS occurred_at
+              , event_count.cardinality
+            FROM main_production.all_events AS all_events
+            LEFT JOIN event_count 
+              ON all_events.event_table_name = event_count.event_table_name
+        )
+        , events AS (
+            SELECT 
+               all_events.event_id
+              , all_events.event_name
+              , ROW_NUMBER() OVER(PARTITION BY all_events.session_id, all_events.user_id ORDER BY all_events.occurred_at) AS sequence_number_for_event_flow
+            FROM all_events
+            INNER JOIN (
+                  SELECT 
+                    event_id
+                    , user_id
+                    , MIN(cardinality) AS cardinality
+                  FROM all_events
+                  GROUP BY 1,2
+            ) AS event 
+                ON all_events.cardinality = event.cardinality
+                AND all_events.event_id = event.event_id
+                AND all_events.user_id = event.user_id
+        )
+      SELECT a.event_id
+            , a.event_table_name AS event_name
+            , a.event_id || '-' || a.event_table_name AS unique_event_id
+            , a.user_id
+            , a.session_id
+            , events.sequence_number_for_event_flow AS sequence_number_for_event_flow
+            , ROW_NUMBER() OVER(PARTITION BY a.session_id, a.user_id ORDER BY a."time") AS event_sequence_number
+      FROM main_production.all_events AS a 
+      LEFT JOIN events
+        ON events.event_id = a.event_id
+        AND events.event_name = a.event_table_name
 
   fields:
   - measure: count
     type: count
     drill_fields: detail*
+
+  - dimension: unique_event_id
+    primary_key: true
+    sql: ${TABLE}.unique_event_id
 
   - dimension: event_id
     type: number
@@ -36,3 +83,8 @@
   - dimension: event_sequence_number
     type: number
     sql: ${TABLE}.event_sequence_number
+
+  - dimension: sequence_number_for_event_flow
+    type: number
+    hidden: true
+    sql: ${TABLE}.sequence_number_for_event_flow
