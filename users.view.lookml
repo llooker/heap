@@ -8,7 +8,8 @@
     sql: ${TABLE}.user_id
 
   - dimension: identity
-    sql: ${TABLE}.identity
+    sql: ${TABLE}."identity"
+    
 
   - dimension_group: joindate
     type: time
