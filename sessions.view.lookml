@@ -120,4 +120,4 @@
     - app_name
     - user_id
     - utm_source
-    - users.email
+    - users.identity

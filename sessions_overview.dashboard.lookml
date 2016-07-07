@@ -309,7 +309,7 @@
     filters:
       sessions.session_month: 8 months ago for 8 months
       user_facts.first_session_month: 8 months ago for 8 months
-      users.email: -NULL
+      users.identity: -NULL
     sorts: [sessions.session_month, user_facts.first_session_month]
     limit: 500
     column_limit: 50
@@ -349,7 +349,7 @@
     filters:
       sessions.session_month: 8 months ago for 8 months
       user_facts.first_session_month: 8 months ago for 8 months
-      users.email: -NULL
+      users.identity: -NULL
     sorts: [sessions.session_month, user_facts.first_session_month]
     limit: 500
     column_limit: 50

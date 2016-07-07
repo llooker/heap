@@ -7,11 +7,8 @@
     type: number
     sql: ${TABLE}.user_id
 
-  - dimension: email
-    sql: ${TABLE}.email
-
-  - dimension: handle
-    sql: ${TABLE}.handle
+  - dimension: identity
+    sql: ${TABLE}.identity
 
   - dimension_group: joindate
     type: time
@@ -28,6 +25,6 @@
   sets:
     detail:
     - user_id
-    - email
+    - identity
     - sessions.count
     - joindate_date
