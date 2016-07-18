@@ -1,4 +1,4 @@
-- connection: heap_redshift
+- connection: heap_sql_folio_hd
 
 - include: "*.view.lookml"       # include all the views
 - include: "*.dashboard.lookml"  # include all the dashboards
