@@ -156,9 +156,9 @@
       device_type: sessions.device_type
       referrer_domain: sessions.referrer_domain_mapped
     filters:
-      funnel_explorer.event1: '"start^_game"'
-      funnel_explorer.event2: '"reports^_view^_any^_report"'
-      funnel_explorer.event3: '"list^_run^_query"'
+      funnel_explorer.event1: '"get^_started"'
+      funnel_explorer.event2: '"signed^_up"'
+      funnel_explorer.event3: '"dashboard^_galleries^_click^_add^_files"'
     sorts: [funnel_explorer.count_sessions_event1 desc]
     limit: 500
     colors: ['#5245ed', '#ed6168', '#1ea8df', '#353b49', '#49cec1', '#b3a0dd', '#db7f2a',

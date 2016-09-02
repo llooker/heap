@@ -17,7 +17,7 @@
     type: field_filter
     explore: all_events
     field: all_events.event_name
-    default_value: start_game # modify to desired default first event name value
+    default_value: get_started # modify to desired default first event name value
   
   - name: date
     type: date_filter
@@ -67,6 +67,7 @@
     limit: 500
     show_view_names: true
     show_row_numbers: true
+    table_theme: gray
   
   - name: top_5_second_events
     title: Top 5 Second Events
@@ -197,6 +198,7 @@
     show_x_axis_label: true
     show_x_axis_ticks: true
     x_axis_scale: auto
+    table_theme: gray
   
   - name: third_events
     title: Third Events
@@ -223,6 +225,7 @@
     show_x_axis_label: true
     show_x_axis_ticks: true
     x_axis_scale: auto
+    table_theme: gray
   
   - name: fourth_events
     title: Fourth Events
@@ -249,6 +252,7 @@
     show_x_axis_label: true
     show_x_axis_ticks: true
     x_axis_scale: auto
+    table_theme: gray
   
   - name: fifth_events
     title: Fifth Events
@@ -275,4 +279,5 @@
     show_x_axis_label: true
     show_x_axis_ticks: true
     x_axis_scale: auto
+    table_theme: gray
 

@@ -225,6 +225,7 @@
     ordering: none
     show_null_labels: false
     show_row_numbers: true
+    table_theme: gray
 
   - name: sessions_by_device
     title: Session Count by Device Type
@@ -378,6 +379,7 @@
       '#7E6984', '#6E6A8A', '#5D6B91', '#4D6C97', '#3D6D9E']
     hidden_fields: [sessions.count_users]
     show_row_numbers: true
+    table_theme: gray
   
   - name: sessions_and_users
     title: Daily Count Sessions and Users
@@ -437,6 +439,7 @@
     show_x_axis_label: true
     show_x_axis_ticks: true
     x_axis_scale: auto
+    table_theme: gray
 
 
 
