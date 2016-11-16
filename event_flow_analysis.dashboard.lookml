@@ -12,17 +12,17 @@
       height: 400
 
   filters:
-  
+
   - name: first_event
     type: field_filter
     explore: all_events
     field: all_events.event_name
     default_value: get_started # modify to desired default first event name value
-  
+
   - name: date
     type: date_filter
     default_value: 30 days
-  
+
   elements:
 
   - name: events_drop_off
@@ -51,7 +51,7 @@
     show_x_axis_ticks: true
     x_axis_scale: auto
     show_dropoff: true
-  
+
   - name: event_flow
     title: Event Flow
     type: table
@@ -68,7 +68,7 @@
     show_view_names: true
     show_row_numbers: true
     table_theme: gray
-  
+
   - name: top_5_second_events
     title: Top 5 Second Events
     type: looker_bar
@@ -94,7 +94,7 @@
     show_x_axis_label: true
     show_x_axis_ticks: true
     x_axis_scale: auto
-  
+
   - name: top_5_third_events
     title: Top 5 Third Events
     type: looker_bar
@@ -120,7 +120,7 @@
     show_x_axis_label: true
     show_x_axis_ticks: true
     x_axis_scale: auto
-  
+
   - name: top_5_fourth_events
     title: Top 5 Fourth Events
     type: looker_bar
@@ -172,7 +172,7 @@
     show_x_axis_label: true
     show_x_axis_ticks: true
     x_axis_scale: auto
-  
+
   - name: second_events
     title: Second Events
     type: table
@@ -199,7 +199,7 @@
     show_x_axis_ticks: true
     x_axis_scale: auto
     table_theme: gray
-  
+
   - name: third_events
     title: Third Events
     type: table
@@ -226,7 +226,7 @@
     show_x_axis_ticks: true
     x_axis_scale: auto
     table_theme: gray
-  
+
   - name: fourth_events
     title: Fourth Events
     type: table
@@ -253,7 +253,7 @@
     show_x_axis_ticks: true
     x_axis_scale: auto
     table_theme: gray
-  
+
   - name: fifth_events
     title: Fifth Events
     type: table
@@ -280,4 +280,3 @@
     show_x_axis_ticks: true
     x_axis_scale: auto
     table_theme: gray
-

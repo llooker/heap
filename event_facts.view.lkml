@@ -1,12 +1,12 @@
-- view: event_facts
-  derived_table:
-    sql_trigger_value: select date(convert_timezone('pst', getdate() - interval '3 hours')) # update trigger value to desired frequency and timezone
-    sortkeys: [event_sequence_number]
-    distkey: unique_event_id
-    sql: |
-      WITH 
+view: event_facts {
+  derived_table: {
+    # update trigger value to desired frequency and timezone
+    sql_trigger_value: select date(convert_timezone('pst', getdate() - interval '3 hours')) ;;
+    sortkeys: ["event_sequence_number"]
+    distribution: "unique_event_id"
+    sql: WITH
         event_count AS (
-            SELECT 
+            SELECT
               event_table_name
               , COUNT(*) AS cardinality
             FROM main_production.all_events
@@ -14,7 +14,7 @@
             GROUP BY 1
         )
         , all_events AS (
-            SELECT 
+            SELECT
               DISTINCT all_events.event_id
               , all_events.user_id AS user_id
               , all_events.session_id
@@ -22,23 +22,23 @@
               , all_events.TIME AS occurred_at
               , event_count.cardinality
             FROM main_production.all_events AS all_events
-            LEFT JOIN event_count 
+            LEFT JOIN event_count
               ON all_events.event_table_name = event_count.event_table_name
         )
         , events AS (
-            SELECT 
+            SELECT
                all_events.event_id
               , all_events.event_name
               , ROW_NUMBER() OVER(PARTITION BY all_events.session_id, all_events.user_id ORDER BY all_events.occurred_at) AS sequence_number_for_event_flow
             FROM all_events
             INNER JOIN (
-                  SELECT 
+                  SELECT
                     event_id
                     , user_id
                     , MIN(cardinality) AS cardinality
                   FROM all_events
                   GROUP BY 1,2
-            ) AS event 
+            ) AS event
                 ON all_events.cardinality = event.cardinality
                 AND all_events.event_id = event.event_id
                 AND all_events.user_id = event.user_id
@@ -50,41 +50,51 @@
             , a.session_id
             , events.sequence_number_for_event_flow AS sequence_number_for_event_flow
             , ROW_NUMBER() OVER(PARTITION BY a.session_id, a.user_id ORDER BY a."time") AS event_sequence_number
-      FROM main_production.all_events AS a 
+      FROM main_production.all_events AS a
       LEFT JOIN events
         ON events.event_id = a.event_id
         AND events.event_name = a.event_table_name
+       ;;
+  }
 
-  fields:
-  - measure: count
+  measure: count {
     type: count
-    drill_fields: detail*
+    drill_fields: [event_name, count]
+  }
 
-  - dimension: unique_event_id
-    primary_key: true
-    sql: ${TABLE}.unique_event_id
+  dimension: unique_event_id {
+    primary_key: yes
+    sql: ${TABLE}.unique_event_id ;;
+  }
 
-  - dimension: event_id
+  dimension: event_id {
     type: number
-    sql: ${TABLE}.event_id
+    sql: ${TABLE}.event_id ;;
+  }
 
-  - dimension: event_name
+  dimension: event_name {
     type: string
-    sql: ${TABLE}.event_name
+    sql: ${TABLE}.event_name ;;
+  }
 
-  - dimension: user_id
+  dimension: user_id {
     type: number
-    sql: ${TABLE}.user_id
+    sql: ${TABLE}.user_id ;;
+  }
 
-  - dimension: session_id
+  dimension: session_id {
     type: number
-    sql: ${TABLE}.session_id
+    sql: ${TABLE}.session_id ;;
+  }
 
-  - dimension: event_sequence_number
+  dimension: event_sequence_number {
     type: number
-    sql: ${TABLE}.event_sequence_number
+    sql: ${TABLE}.event_sequence_number ;;
+  }
 
-  - dimension: sequence_number_for_event_flow
+  dimension: sequence_number_for_event_flow {
     type: number
-    hidden: true
-    sql: ${TABLE}.sequence_number_for_event_flow
+    hidden: yes
+    sql: ${TABLE}.sequence_number_for_event_flow ;;
+  }
+}

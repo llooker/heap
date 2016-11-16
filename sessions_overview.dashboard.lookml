@@ -20,17 +20,17 @@
       height: 250
 
   filters:
-  
+
   - name: date
     title: "Date"
     type: date_filter
     default_value: 30 days
-  
+
   - name: device_type
     type: field_filter
     explore: sessions
     field: sessions.device_type
-  
+
   - name: referrer_domain
     type: field_filter
     explore: sessions
@@ -50,7 +50,7 @@
       referrer_domain: sessions.referrer_domain_mapped
     limit: 500
     font_size: medium
-  
+
   - name: distinct_users
     title: Distinct Users
     type: single_value
@@ -63,7 +63,7 @@
       referrer_domain: sessions.referrer_domain_mapped
     limit: 500
     font_size: medium
-  
+
   - name: avg_sessions_user
     title: Average Sessions per Distinct User
     type: single_value
@@ -76,7 +76,7 @@
       referrer_domain: sessions.referrer_domain_mapped
     limit: 500
     font_size: medium
-  
+
   - name: avg_session_dur
     title: Average Session Duration (Minutes)
     type: single_value
@@ -90,7 +90,7 @@
     filters:
       session_facts.session_duration_minutes: <300
     limit: 500
-  
+
   - name: new_sessions
     title: New vs Returning Sessions
     type: looker_area
@@ -126,7 +126,7 @@
     x_axis_scale: auto
     point_style: none
     interpolation: linear
-    
+
   - name: daily_session_cnt_dur
     title: Daily Session Count and Session Duration
     type: looker_column
@@ -137,7 +137,7 @@
     listen:
       date: sessions.session_date
       device_type: sessions.device_type
-      referrer_domain: sessions.referrer_domain_mapped  
+      referrer_domain: sessions.referrer_domain_mapped
     filters:
       session_facts.session_duration_minutes: <300
     sorts: [sessions.session_date]
@@ -188,7 +188,7 @@
     x_axis_label: Referrer
     show_x_axis_ticks: true
     x_axis_scale: auto
-  
+
   - name: referrer_stats
     title: External Referrer Stats
     type: table
@@ -276,7 +276,7 @@
     limit: 500
     map: world
     colors: ['#5245ed']
-  
+
   - name: sessions_by_state
     title: Sessions by State (US)
     type: looker_geo_choropleth
@@ -289,13 +289,13 @@
     listen:
       date: sessions.session_date
       device_type: sessions.device_type
-      referrer_domain: sessions.referrer_domain_mapped   
+      referrer_domain: sessions.referrer_domain_mapped
     sorts: [sessions.count desc]
     limit: 500
     map: usa
     show_view_names: true
     colors: ['#5245ed']
-  
+
   - name: retention_area
     title: User Retention by First Month (Authenticated Users)
     type: looker_area
@@ -306,7 +306,7 @@
     measures: [sessions.count_users]
     listen:
       device_type: sessions.device_type
-      referrer_domain: sessions.referrer_domain_mapped  
+      referrer_domain: sessions.referrer_domain_mapped
     filters:
       sessions.session_month: 8 months ago for 8 months
       user_facts.first_session_month: 8 months ago for 8 months
@@ -330,7 +330,7 @@
     x_axis_scale: auto
     point_style: none
     interpolation: linear
-  
+
   - name: percent_retention_table
     title: Retention Table
     type: table
@@ -346,7 +346,7 @@
       value_format: 0.00\%
     listen:
         device_type: sessions.device_type
-        referrer_domain: sessions.referrer_domain_mapped  
+        referrer_domain: sessions.referrer_domain_mapped
     filters:
       sessions.session_month: 8 months ago for 8 months
       user_facts.first_session_month: 8 months ago for 8 months
@@ -380,7 +380,7 @@
     hidden_fields: [sessions.count_users]
     show_row_numbers: true
     table_theme: gray
-  
+
   - name: sessions_and_users
     title: Daily Count Sessions and Users
     type: looker_column
@@ -414,7 +414,7 @@
     show_x_axis_label: true
     show_x_axis_ticks: true
     x_axis_scale: auto
-  
+
   - name: top_100_events
     title: Top 100 Event Types
     type: table
@@ -440,16 +440,3 @@
     show_x_axis_ticks: true
     x_axis_scale: auto
     table_theme: gray
-
-
-
-
-
-
-
-
-
-
-
-
-

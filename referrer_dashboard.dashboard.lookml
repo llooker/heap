@@ -8,25 +8,25 @@
       height: 400
     - elements: [device_type_breakdown, conversion_funnel]
       height: 400
-      
-  filters: 
-  
+
+  filters:
+
   - name: date
     title: "Date"
     type: date_filter
     default_value: 30 days
-  
+
   - name: device_type
     type: field_filter
     explore: sessions
     field: sessions.device_type
-  
+
   - name: referrer_domain
     type: field_filter
     explore: sessions
     field: sessions.referrer_domain_mapped
     default_value: google # modify to desired default mapped referrer domain
-    
+
   elements:
 
   - name: total_sessions
@@ -42,7 +42,7 @@
     sorts: [sessions.count desc]
     limit: 500
     font_size: medium
-  
+
   - name: distinct_users
     title: Distinct Users
     type: single_value
@@ -56,7 +56,7 @@
     sorts: [sessions.count_users desc]
     limit: 500
     font_size: medium
-  
+
   - name: avg_sessions_user
     title: Average Sessions per Distinct User
     type: single_value
@@ -70,7 +70,7 @@
     sorts: [sessions.average_sessions_per_user desc]
     limit: 500
     font_size: medium
-  
+
   - name: avg_session_dur
     title: Average Session Duration (Minutes)
     type: single_value
@@ -85,7 +85,7 @@
       session_facts.session_duration_minutes: <300
     sorts: [session_facts.average_session_duration desc, session_facts.average_session_duration_minutes desc]
     limit: 500
-  
+
   - name: daily_session_user_counts
     title: Daily Session and User Counts
     type: looker_line
@@ -115,7 +115,7 @@
     show_null_points: true
     point_style: none
     interpolation: linear
-  
+
   - name: device_type_breakdown
     title: Device Type Breakdown
     type: looker_bar
@@ -142,8 +142,8 @@
     show_x_axis_label: true
     show_x_axis_ticks: true
     x_axis_scale: auto
-  
-  
+
+
   - name: conversion_funnel
     title: Custom Conversion Funnel
     type: looker_column
@@ -175,5 +175,3 @@
     show_x_axis_ticks: true
     x_axis_scale: auto
     show_dropoff: true
-
-
