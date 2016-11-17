@@ -17,7 +17,7 @@
     type: field_filter
     explore: all_events
     field: all_events.event_name
-    default_value: get_started # modify to desired default first event name value
+    default_value: homepage_click_get_started # modify to desired default first event name value
 
   - name: date
     type: date_filter

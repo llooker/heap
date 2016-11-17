@@ -100,7 +100,7 @@
     pivots: [session_facts.is_first_session]
     measures: [sessions.count]
     listen:
-      date: session_facts.session_start_time_date
+      date: sessions.session_date
       device_type: sessions.device_type
       referrer_domain: sessions.referrer_domain_mapped
     sorts: [sessions.session_date, session_facts.is_first_session]

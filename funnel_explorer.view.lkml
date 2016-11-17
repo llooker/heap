@@ -94,7 +94,7 @@ view: funnel_explorer {
   measure: count_sessions_event1 {
     type: count_distinct
     sql: ${session_unique_id} ;;
-
+    drill_fields: [session_unique_id]
     filters: {
       field: event1_time
       value: "NOT NULL"
@@ -117,7 +117,7 @@ view: funnel_explorer {
 
     filters: {
       field: event1_before_event2
-      value: "true"
+      value: "Yes"
     }
   }
 
@@ -142,12 +142,12 @@ view: funnel_explorer {
 
     filters: {
       field: event1_before_event2
-      value: "true"
+      value: "Yes"
     }
 
     filters: {
       field: event2_before_event3
-      value: "true"
+      value: "Yes"
     }
   }
 

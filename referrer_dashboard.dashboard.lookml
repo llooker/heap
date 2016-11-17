@@ -156,7 +156,7 @@
       device_type: sessions.device_type
       referrer_domain: sessions.referrer_domain_mapped
     filters:
-      funnel_explorer.event1: '"get^_started"'
+      funnel_explorer.event1: homepage_click_get_started
       funnel_explorer.event2: '"signed^_up"'
       funnel_explorer.event3: '"dashboard^_galleries^_click^_add^_files"'
     sorts: [funnel_explorer.count_sessions_event1 desc]
