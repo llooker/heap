@@ -79,11 +79,13 @@ view: funnel_explorer {
   dimension: event1_before_event2 {
     type: yesno
     sql: ${event1_time} < ${event2_time} ;;
+    hidden: yes
   }
 
   dimension: event2_before_event3 {
     type: yesno
     sql: ${event2_time} < ${event3_time} ;;
+    hidden: yes
   }
 
   measure: count_sessions {
