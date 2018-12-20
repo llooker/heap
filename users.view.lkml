@@ -1,5 +1,5 @@
 view: users {
-  sql_table_name: main_production.users ;;
+  sql_table_name: heap.users ;;
 
   dimension: user_id {
     primary_key: yes
