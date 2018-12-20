@@ -1,4 +1,4 @@
-connection: "usage_clone"
+connection: "redshift_clone"
 
 # include all the views
 include: "*.view"
