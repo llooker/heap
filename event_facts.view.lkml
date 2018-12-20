@@ -9,7 +9,7 @@ view: event_facts {
             SELECT
               event_table_name
               , COUNT(*) AS cardinality
-            FROM main_production.all_events
+            FROM heap.all_events
             WHERE TIME > DATEADD('day', - 30, GETDATE())
             GROUP BY 1
         )
@@ -21,7 +21,7 @@ view: event_facts {
               , all_events.event_table_name AS event_name
               , all_events.TIME AS occurred_at
               , event_count.cardinality
-            FROM main_production.all_events AS all_events
+            FROM heap.all_events AS all_events
             LEFT JOIN event_count
               ON all_events.event_table_name = event_count.event_table_name
         )
@@ -50,7 +50,7 @@ view: event_facts {
             , a.session_id
             , events.sequence_number_for_event_flow AS sequence_number_for_event_flow
             , ROW_NUMBER() OVER(PARTITION BY a.session_id, a.user_id ORDER BY a."time") AS event_sequence_number
-      FROM main_production.all_events AS a
+      FROM heap.all_events AS a
       LEFT JOIN events
         ON events.event_id = a.event_id
         AND events.event_name = a.event_table_name
