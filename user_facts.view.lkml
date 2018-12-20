@@ -9,7 +9,7 @@ view: user_facts {
         min(sessions.time) AS first_session,
         max(sessions.time) as latest_session,
         COUNT(*) AS session_count
-      FROM main_production.sessions AS sessions
+      FROM heap.sessions AS sessions
       GROUP BY 1
        ;;
   }
