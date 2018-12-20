@@ -11,7 +11,7 @@ view: session_facts {
         min(all_events.time) AS session_start_time,
         max(all_events.time) AS session_end_time,
         COUNT(*) AS "all_events.count"
-      FROM main_production.all_events AS all_events
+      FROM heap.all_events AS all_events
 
       GROUP BY 1,2
        ;;
